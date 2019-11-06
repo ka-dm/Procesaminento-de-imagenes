@@ -28,7 +28,9 @@ def creaDirSalida():
         print("Se creo el directorio /"+ nombre)
         return(""+ script_dir + "/" + nombre)   
    
-def convRGVtoYUV(img):
+def convRGVtoYUV(img_ent):
+    img = img_ent
+
     i = 0
     while i < img.size[0]:
         j = 0
@@ -43,7 +45,6 @@ def convRGVtoYUV(img):
             img.putpixel((i,j), pixel)
             j+=1
         i+=1
-    return img
       
 
 if __name__ == "__main__":
@@ -51,5 +52,6 @@ if __name__ == "__main__":
     #Ejecucion de los metodos que lee, muestra y guarda una imagen
     imagen = leeImg("C:/Users/kevin/Documents/Procesamiento-de-imagenes/images/21_training.tif")
     muestaImg(imagen)
-    copia = convRGVtoYUV(imagen)
-    escribeImg(imagen, "copia2", "png")
+    convRGVtoYUV(imagen)
+    muestaImg(imagen)
+    escribeImg(imagen, "copia2", "tif")
