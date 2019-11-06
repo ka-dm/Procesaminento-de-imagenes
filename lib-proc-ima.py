@@ -1,29 +1,17 @@
 from PIL import Image
 import time
 
-def escalaDeGrises(im):
-    tiempoIn = time.time()
-    ruta = ("C:/Users/kevin/Desktop/" + im)
-    im = Image.open(ruta)
-    im.show()
-    
-    im2 = im
-    i = 0
-    while i < im2.size[0]:
-        j = 0
-        while j < im2.size[1]:
-            r, g, b = im2.getpixel((i,j))
-            g = (r + g + b) / 3
-            gris = int(g)
-            pixel = tuple([gris, gris, gris])
-            im2.putpixel((i,j), pixel)
-            j+=1
-        i+=1
-    im2.show()
-    
-    tiempoFin = time.time()
-    print('El Proceso Tardo: ', tiempoFin - tiempoIn, 'Segundos')
-    
+def leeImg(src):
+    img = Image.open(src)
+    return img
+
+def muestaImg(img):
+    img.show()
+
+def escribeImg(img):
+    img.save("C:/Users/kevin/Documents/Procesamiento-de-imagenes/granja-copia.jpg", "png")
+    #print("El nombre de la imagen es: " + img.filename)   
+   
 def convRGVtoYUV(im):
     tiempoIn = time.time()
     ruta = ("C:/Users/kevin/Desktop/" + im)
@@ -48,7 +36,9 @@ def convRGVtoYUV(im):
     im2.show()
     
     tiempoFin = time.time()
-    print('El Proceso Tardo: ', tiempoFin - tiempoIn, 'Segundos')    
+    print('El Proceso Tardo: ', tiempoFin - tiempoIn, 'Segundos')   
 
-#hace el llamado al metodo y tecibe como paramtro la ruta de la imgen
-convRGVtoYUV("granja.png")    
+if __name__ == "__main__":
+    imagen = leeImg("C:/Users/kevin/Desktop/granja.png")
+    #muestaImg(imagen)
+    escribeImg(imagen)
