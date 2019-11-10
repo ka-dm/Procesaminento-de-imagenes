@@ -50,8 +50,8 @@ def convRGVtoYUV(img_ent):
 if __name__ == "__main__":
     
     #Ejecucion de los metodos que lee, muestra y guarda una imagen
-    imagen = leeImg("C:/Users/kevin/Documents/Procesamiento-de-imagenes/images/21_training.tif")
+    imagen = leeImg("hola.jpg")
     muestaImg(imagen)
     convRGVtoYUV(imagen)
     muestaImg(imagen)
-    escribeImg(imagen, "copia2", "tif")
+    escribeImg(imagen, "copia2", "jpg")
