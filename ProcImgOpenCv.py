@@ -6,14 +6,15 @@ from Tkinter import *
 
 # -*- coding: utf-8 -*- 
 def leeImg(src):
-    img = cv2.imread(src)
+    img = cv2.imread(src, cv2.IMREAD_GRAYSCALE)
     return img
 
 def muestaImg(img):
     # Usa la libreria matplotlib para mostar una imagen en una ventana
-    plt.imshow(img, cmap = 'gray', interpolation = 'bicubic')
-    plt.xticks([]), plt.yticks([]) # to hide tick values on X and Y axis
-    plt.show()
+    cv2.namedWindow('window',cv2.WINDOW_NORMAL)
+    cv2.imshow('window',img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 def escribeImg(img, nombre, formato):
     src_salida = creaDirSalida()
@@ -38,14 +39,28 @@ def creaDirSalida():
 def histograma(img):
     # Muestra el histograma de la imagen
     
-    color = ('b','g','r')
+    color = ('r','g','b')
     for i, c in enumerate(color):
-        hist = cv2.calcHist([img], [i], None, [256], [0, 256])
-        plt.plot(hist, color = c)
+        hist = cv2.calcHist([img], [0], None, [256], [0, 256])
+        plt.plot(hist, color = 'gray')
         plt.xlim([0,256])
+        
 
     plt.show()
     cv2.destroyAllWindows()
+
+def histograma2(img):
+    hist = cv2.calcHist([img], [0], None, [256], [0, 256])
+    Max = max(hist)
+    arrayY=[]
+    for i in hist :
+        escala=((100*i)/Max)
+        arrayY.append(escala)
+    plt.plot(arrayY, color = 'black')
+    plt.xlim([0,255])
+
+    plt.show()
+    print (Max)
 
 def interfaz():
     
@@ -63,13 +78,13 @@ def interfaz():
 
 if __name__ == "__main__":
     
-    src = "hola.jpg"
+    src = "foto 8001.png"
     
-    interfaz()
+    #interfaz()
 
 
     imagen = leeImg(src)
-    histograma(imagen)
+    histograma2(imagen)
     muestaImg(imagen)    
     escribeImg(imagen, "copia", "jpg")
     
